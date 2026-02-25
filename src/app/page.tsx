@@ -6,10 +6,25 @@ import { Button } from '@/components/Button';
 
 const SWEDISH_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ';
 
+const ACCENT_MAP: Record<string, string> = {
+  'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A',
+  'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E',
+  'Ì': 'I', 'Í': 'I', 'Î': 'I', 'Ï': 'I',
+  'Ò': 'O', 'Ó': 'O', 'Ô': 'O', 'Õ': 'O',
+  'Ù': 'U', 'Ú': 'U', 'Û': 'U', 'Ü': 'U',
+  'Ñ': 'N', 'Ý': 'Y', 'Ÿ': 'Y', 'Ç': 'C',
+  'Ð': 'D', 'Ś': 'S', 'Š': 'S', 'Ź': 'Z', 'Ž': 'Z',
+  'Ł': 'L', 'Ń': 'N', 'Ř': 'R', 'Ť': 'T',
+};
+
+function normalizeAccents(text: string): string {
+  return [...text].map(ch => ACCENT_MAP[ch] ?? ch).join('');
+}
+
 function calculateCoverage(name: string): number {
-  const upperName = name.toUpperCase();
+  const normalized = normalizeAccents(name.toUpperCase());
   const distinct = new Set(
-    [...upperName].filter(ch => SWEDISH_ALPHABET.includes(ch))
+    [...normalized].filter(ch => SWEDISH_ALPHABET.includes(ch))
   );
   return Math.round((distinct.size / SWEDISH_ALPHABET.length) * 1000) / 10;
 }
