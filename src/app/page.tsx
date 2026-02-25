@@ -46,9 +46,9 @@ export default function Home() {
       ) : (
         <div className="flex flex-col items-center gap-6">
           <p className="text-textsecondary text-standard">{name}</p>
-          <p className="text-text text-standard">innehåller</p>
+          <p className="text-text text-standard">täcker</p>
           <p className="text-primary text-large">{result}%</p>
-          <p className="text-textsecondary text-small">av svenska alfabetet</p>
+          <p className="text-textsecondary text-small text-center">av svenska alfabetet</p>
           <Button onClick={handleClear} size="md">CLEAR</Button>
         </div>
       )}
